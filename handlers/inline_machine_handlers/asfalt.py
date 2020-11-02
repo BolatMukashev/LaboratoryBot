@@ -15,7 +15,8 @@ async def min_por_test_start(call: CallbackQuery, callback_data: dict):
     dno_state = check_dno_state(call.from_user.id)
     kol_vo = len(frakc_names(asfalt_type)) - 1 + dno_state
     await call.answer('Начато испытание зернового состава асфальтобетонной смеси', cache_time=1)
-    await call.message.answer(f'Начато испытание зернового состава асфальтобетонной смеси. Введите <b>{kol_vo}</b> чисел.')
+    await call.message.answer(f'Начато испытание зернового состава асфальтобетонной смеси. Введите <b>{kol_vo}</b> '
+                              f'чисел.')
     await call.message.edit_reply_markup()
     await AllStates.Asfalt.set()
 
@@ -40,17 +41,10 @@ async def answer_min_por(message: types.Message, state: FSMContext):
                                                                                                 user_id=user_id,
                                                                                                 ves_all=ves_all)
         if text == '<b>Подсчет окончен</b>. Вот ваш результат':
-            # формируем таблицу
             zernovoi_table = zernovoi_table_str(list_names, list_ves, list_cho, list_po, list_pp, ves_all)
-            # формируем тех.условия, где:
             tech_usloviya = tech_usl(user_state, list_pp, list_names[1:])
-            # формируем график
             create_grafic(user_id, list_pp, user_state, orientation='landscape')
-            # создаем pdf
-            file_name = create_pdf(user_id=user_id,
-                                   title=user_state,
-                                   table=zernovoi_table,
-                                   tech_usloviya=tech_usloviya,
+            file_name = create_pdf(user_id=user_id, title=user_state, table=zernovoi_table, tech_usloviya=tech_usloviya,
                                    orientation='landscape')
             try:
                 with open(r'./users_files/' + f'{user_id}/' + file_name, 'rb') as document:

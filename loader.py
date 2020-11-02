@@ -14,6 +14,7 @@ from reportlab.lib.pagesizes import A4, landscape
 import reportlab.rl_config
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
+from math import ceil
 
 pt = PrettyTable()
 
@@ -436,7 +437,7 @@ def tech_usl(title: str, list_pp: list, list_names: list):
     return list_tech_usl
 
 
-def update_tech_usl(tu_list: list):
+def update_tech_usl_old(tu_list: list):
     list_f = [[], [], [], [], [], []]
     if len(tu_list) > 6:
         for pos, el in enumerate(tu_list):
@@ -447,6 +448,17 @@ def update_tech_usl(tu_list: list):
     else:
         list_f = list(map(lambda x: [x], tu_list))
     return list_f
+
+
+def update_tech_usl(tu_list: list):
+    fin_list = []
+    list_f = tu_list.copy()
+    list1_len = ceil(len(list_f) / 2)
+    for _ in range(list1_len):
+        fin_list.append([list_f.pop(0)])
+    for _ in range(len(list_f)):
+        fin_list[_].append(list_f.pop(0))
+    return fin_list
 
 
 def error_log(func):
@@ -462,7 +474,8 @@ def create_pdf(user_id: int,
                title: str,
                table: list,
                tech_usloviya: list,
-               orientation: str = 'portrait'):
+               orientation: str = 'portrait',
+               modified_tech_usl: bool = False):
     directory = (os.getcwd()).replace('\\', '/') + '/users_files/' + f'{user_id}/'
 
     if orientation == 'portrait':
@@ -520,7 +533,6 @@ def create_pdf(user_id: int,
     time_in_document = time_on_user.strftime('%d.%m.%Y, время %H:%M')
     text_in_doc.append(Paragraph(time_in_document, styles['FontRegularRIGHT']))
 
-    print('Начинаем создавать таблицу')
     # таблица
     kol_vo_elements = len(table[0])
     shirina_yacheiki = col_size / kol_vo_elements
@@ -550,25 +562,24 @@ def create_pdf(user_id: int,
                            ('FONTSIZE', (1, 1), (-1, -1), 12)
                            ]))
     text_in_doc.append(t)
-    print('Таблица создана')
 
-    print('Начинаем создавать тех условия')
     # тех условия
     text_in_doc.append(Paragraph('Тех. условия', styles['FontBoldSimple']))
-    tech_usloviya = update_tech_usl(tech_usloviya)
-    t_u = Table(tech_usloviya, colWidths=col_size / 2, rowHeights=26)
+    if modified_tech_usl:
+        t_u = Table(tech_usloviya, colWidths=col_size, rowHeights=36)
+    else:
+        tech_usloviya = update_tech_usl(tech_usloviya)
+        t_u = Table(tech_usloviya, colWidths=col_size / 2, rowHeights=26)
     t_u.setStyle(TableStyle([('FONTNAME', (0, 0), (-1, -1), 'NotoSansRegular'),
                              ('FONTSIZE', (0, 0), (-1, -1), 12)]))
     text_in_doc.append(t_u)
-    print('Тех условия добавлены')
+    text_in_doc.append(Paragraph('_', styles['FontBoldSimple']))
 
-    print('Начинаем создавать картинку')
     # картинка
     for file in os.scandir(directory):
         if file.name.endswith(".png"):
             img = Image(directory + file.name, width=col_size, height=row_size)
             text_in_doc.append(img)
-    print('Картинка добавлена')
 
     # ссылка на бота
     address = '<link href="' + bot_url + '">' + f'Создано в телеграм боте @{bot_name}' + '</link>'
@@ -647,7 +658,6 @@ def zernovoi_table_str(list_names: list,
                        list_po: list,
                        list_pp: list,
                        ves_all: float):
-
     list_ves = list_formatting(list_ves)
     list_cho = list_formatting(list_cho)
     list_po = list_formatting(list_po)
