@@ -40,10 +40,13 @@ async def answer_min_por(message: types.Message, state: FSMContext):
                                                                                                 ves_all=ves_all)
         if text == '<b>Подсчет окончен</b>. Вот ваш результат':
             zernovoi_table = zernovoi_table_str(list_names, list_ves, list_cho, list_po, list_pp, ves_all)
-            tech_usloviya = tech_usl(user_state, list_pp, list_names[1:])
+            tech_usloviya = standart_technical_specific(user_state, list_pp, list_names[1:])
             create_grafic(user_id, list_pp, user_state, orientation='landscape')
-            file_name = create_pdf(user_id=user_id, title=user_state, table=zernovoi_table, tech_usloviya=tech_usloviya,
-                                   orientation='landscape')
+            file_name = create_pdf(user_id=user_id,
+                                   title=user_state,
+                                   table=zernovoi_table,
+                                   technical_specific=tech_usloviya,
+                                   page_orientation='landscape')
             try:
                 with open(r'./users_files/' + f'{user_id}/' + file_name, 'rb') as document:
                     await message.answer(text)

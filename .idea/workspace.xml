@@ -13,12 +13,17 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c8855ed-a8f3-4cca-8de3-4ab1b4fd5ecb" name="Default Changelist" comment="Исправил работу зерновой отсев">
+    <list default="true" id="6c8855ed-a8f3-4cca-8de3-4ab1b4fd5ecb" name="Default Changelist" comment="убрал длинные импорты, заменил на *">
+      <change afterPath="$PROJECT_DIR$/styles_in_pdf.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/inline_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/inline_handler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handlers/inline_machine_handlers/asfalt.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/inline_machine_handlers/asfalt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/inline_machine_handlers/beton.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/inline_machine_handlers/beton.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handlers/inline_machine_handlers/miner_poroshok.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/inline_machine_handlers/miner_poroshok.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handlers/inline_machine_handlers/otsev.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/inline_machine_handlers/otsev.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/inline_machine_handlers/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/inline_machine_handlers/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handlers/inline_machine_handlers/sheben.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/inline_machine_handlers/sheben.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/loader.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +167,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604333225326</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="убрал длинные импорты, заменил на *">
+      <created>1604668902505</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1604668902505</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -182,7 +194,8 @@
     <MESSAGE value="start" />
     <MESSAGE value="test" />
     <MESSAGE value="Исправил работу зерновой отсев" />
-    <option name="LAST_COMMIT_MESSAGE" value="Исправил работу зерновой отсев" />
+    <MESSAGE value="убрал длинные импорты, заменил на *" />
+    <option name="LAST_COMMIT_MESSAGE" value="убрал длинные импорты, заменил на *" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="17" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604251072557">
@@ -249,10 +262,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="513" y="232" key="VCS.EditChangelistDialog/0.0.1366.728@0.0.1366.728" timestamp="1604250931589" />
-    <state x="299" y="94" key="Vcs.Push.Dialog.v2" timestamp="1604333232616">
+    <state x="299" y="94" key="Vcs.Push.Dialog.v2" timestamp="1604668913884">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="299" y="94" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1604333232616" />
+    <state x="299" y="94" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1604668913884" />
     <state x="500" y="276" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604252367968">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

@@ -41,12 +41,12 @@ async def answer_min_por(message: types.Message, state: FSMContext):
             # формируем таблицу
             zernovoi_table = zernovoi_table_str(list_names, list_ves, list_cho, list_po, list_pp, ves_all)
             # формируем тех.условия
-            tech_usloviya = tech_usl(user_state, list_pp, list_names[1:])
+            tech_usloviya = standart_technical_specific(user_state, list_pp, list_names[1:])
             # формируем график
             create_grafic(user_id, list_pp, user_state, orientation='portrait')
             # создаем pdf
-            file_name = create_pdf(user_id=user_id, title=user_state, table=zernovoi_table, tech_usloviya=tech_usloviya,
-                                   orientation='portrait')
+            file_name = create_pdf(user_id=user_id, title=user_state, table=zernovoi_table, technical_specific=tech_usloviya,
+                                   page_orientation='portrait')
             try:
                 with open(r'./users_files/' + f'{user_id}/' + file_name, 'rb') as document:
                     await message.answer(text)

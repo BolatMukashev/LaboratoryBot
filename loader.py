@@ -7,14 +7,10 @@ from prettytable import PrettyTable
 from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 from reportlab.platypus import Paragraph, SimpleDocTemplate, Table, TableStyle, Image
-from reportlab.lib.enums import TA_CENTER, TA_RIGHT
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4, landscape
-import reportlab.rl_config
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
 from math import ceil
+from styles_in_pdf import paragraph_styles
 
 pt = PrettyTable()
 
@@ -408,14 +404,14 @@ def frakc_names(title: str):
 def check_title(title: str):
     proverka = title.split(':')
     if len(proverka) == 1:
-        directory = dict_proverka[title]
+        path_to_directory = dict_proverka[title]
     elif len(proverka) == 2:
-        directory = dict_proverka[proverka[0]][proverka[1]]
-    return directory
+        path_to_directory = dict_proverka[proverka[0]][proverka[1]]
+    return path_to_directory
 
 
 # проверка тех. условий
-def tech_usl(title: str, list_pp: list, list_names: list):
+def standart_technical_specific(title: str, list_pp: list, list_names: list):
     znacheniya = []
     keys_dir = check_title(title)
     for x in list_names:
@@ -437,20 +433,7 @@ def tech_usl(title: str, list_pp: list, list_names: list):
     return list_tech_usl
 
 
-def update_tech_usl_old(tu_list: list):
-    list_f = [[], [], [], [], [], []]
-    if len(tu_list) > 6:
-        for pos, el in enumerate(tu_list):
-            if pos <= 5:
-                list_f[pos].append(el)
-            else:
-                list_f[pos - 6].append(el)
-    else:
-        list_f = list(map(lambda x: [x], tu_list))
-    return list_f
-
-
-def update_tech_usl(tu_list: list):
+def update_technical_specific(tu_list: list):
     fin_list = []
     list_f = tu_list.copy()
     list1_len = ceil(len(list_f) / 2)
@@ -470,51 +453,42 @@ def error_log(func):
     return some()
 
 
-def create_pdf(user_id: int,
-               title: str,
-               table: list,
-               tech_usloviya: list,
-               orientation: str = 'portrait',
-               modified_tech_usl: bool = False):
-    directory = (os.getcwd()).replace('\\', '/') + '/users_files/' + f'{user_id}/'
-
+def get_page_sizes(orientation):
     if orientation == 'portrait':
-        orientation = A4
-        col_size = 560
-        row_size = 310
+        page_orientation = A4
+        page_width = 560
+        page_height = 310
     else:
-        orientation = landscape(A4)
-        col_size = 800
-        row_size = 400
+        page_orientation = landscape(A4)
+        page_width = 800
+        page_height = 400
+    return page_orientation, page_width, page_height
 
-    # дата и время
+
+def get_time_on_user(user_id):
     time_on_server = datetime.now()
     user_time_zone = check_time_zone(user_id)
     time_on_user = time_on_server + timedelta(hours=int(user_time_zone) - int(server_time_zone))
+    return time_on_user
 
-    # пути к шрифтам и регистрация шрифтов
-    fonts_directory = (os.getcwd()).replace('\\', '/') + '/fonts/'
-    reportlab.rl_config.TTFSearchPath = fonts_directory
-    pdfmetrics.registerFont(TTFont('NotoSansRegular', fonts_directory + 'NotoSans-Regular.ttf'))
-    pdfmetrics.registerFont(TTFont('NotoSansBold', fonts_directory + 'NotoSans-Bold.ttf'))
 
-    # применяем стили
-    styles = getSampleStyleSheet()  # дефолтовые стили
-    styles.add(ParagraphStyle(fontName='NotoSansBold', name='FontBold', leading=30, fontSize=24, alignment=TA_CENTER))
-    styles.add(
-        ParagraphStyle(fontName='NotoSansBold', name='FontBoldSimple', leading=24, fontSize=16, alignment=TA_CENTER,
-                       spaceBefore=8))
-    styles.add(ParagraphStyle(fontName='NotoSansRegular', name='FontRegular', leading=20, fontSize=12))
-    styles.add(ParagraphStyle(fontName='NotoSansRegular', name='FontRegularRIGHT', leading=20, fontSize=12,
-                              alignment=TA_RIGHT))
-    styles.add(ParagraphStyle(fontName='NotoSansRegular', name='FontRegularRIGHTsimple', leading=20, fontSize=10,
-                              alignment=TA_RIGHT, spaceBefore=15))
+def create_pdf(user_id: int,
+               title: str,
+               table: list,
+               technical_specific: list,
+               page_orientation: str = 'portrait',
+               modified_tech_usl: bool = False):
+    directory = (os.getcwd()).replace('\\', '/') + '/users_files/' + f'{user_id}/'
+
+    page_orientation, page_width, page_height = get_page_sizes(page_orientation)
+
+    set_time_in_pdf_page = get_time_on_user(user_id)
 
     # создаем объект документа с размером страницы A4
     title2: str = title.replace(':', ', ')
     file_name = f'{title2}.pdf'
     doc = SimpleDocTemplate(directory + file_name,
-                            pagesize=orientation,
+                            pagesize=page_orientation,
                             title='Испытание зернового состава',
                             author='LabyLab Inc',
                             leftMargin=20,
@@ -522,70 +496,71 @@ def create_pdf(user_id: int,
                             topMargin=5,
                             bottomMargin=5)
 
-    text_in_doc = []  # словарь документа
+    elements_on_pdf_page = []
 
     # заглавие
-    text_in_doc.append(Paragraph('Испытание зернового состава', styles['FontBold']))
-    simple_title = zaglavie[title]
-    text_in_doc.append(Paragraph(simple_title, styles['FontBoldSimple']))
+    main_title = 'Испытание зернового состава'
+    elements_on_pdf_page.append(Paragraph(main_title, paragraph_styles['FontBold']))
+    second_title = zaglavie[title]
+    elements_on_pdf_page.append(Paragraph(second_title, paragraph_styles['FontBoldSimple']))
 
     # дата и время
-    time_in_document = time_on_user.strftime('%d.%m.%Y, время %H:%M')
-    text_in_doc.append(Paragraph(time_in_document, styles['FontRegularRIGHT']))
+    time_in_document = set_time_in_pdf_page.strftime('%d.%m.%Y, время %H:%M')
+    elements_on_pdf_page.append(Paragraph(time_in_document, paragraph_styles['FontRegularRIGHT']))
 
     # таблица
     kol_vo_elements = len(table[0])
-    shirina_yacheiki = col_size / kol_vo_elements
-    t = Table(table, colWidths=shirina_yacheiki, rowHeights=36)
-    t.setStyle(TableStyle([('ALIGN', (0, 0), (-1, -1), 'CENTER'),  # Общие настройки
-                           ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-                           ('GRID', (0, 0), (-1, -1), 1, colors.black),
+    column_width = page_width / kol_vo_elements
+    main_table = Table(table, colWidths=column_width, rowHeights=36)
+    main_table.setStyle(TableStyle([('ALIGN', (0, 0), (-1, -1), 'CENTER'),  # Общие настройки
+                                    ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+                                    ('GRID', (0, 0), (-1, -1), 1, colors.black),
 
-                           ('TEXTCOLOR', (0, 0), (0, 0), '#f54768'),  # Вес
-                           ('BACKGROUND', (0, 0), (0, 0), '#41436a'),
-                           ('FONTNAME', (0, 0), (0, 0), 'NotoSansBold'),
-                           ('FONTSIZE', (0, 0), (0, 0), 16),
+                                    ('TEXTCOLOR', (0, 0), (0, 0), '#f54768'),  # Вес
+                                    ('BACKGROUND', (0, 0), (0, 0), '#41436a'),
+                                    ('FONTNAME', (0, 0), (0, 0), 'NotoSansBold'),
+                                    ('FONTSIZE', (0, 0), (0, 0), 16),
 
-                           ('TEXTCOLOR', (1, 0), (-1, 0), colors.white),  # Горизонтальная линия
-                           ('BACKGROUND', (1, 0), (-1, 0), '#41436a'),
-                           ('FONTNAME', (1, 0), (-1, 0), 'NotoSansRegular'),
-                           ('FONTSIZE', (1, 0), (-1, 0), 12),
+                                    ('TEXTCOLOR', (1, 0), (-1, 0), colors.white),  # Горизонтальная линия
+                                    ('BACKGROUND', (1, 0), (-1, 0), '#41436a'),
+                                    ('FONTNAME', (1, 0), (-1, 0), 'NotoSansRegular'),
+                                    ('FONTSIZE', (1, 0), (-1, 0), 12),
 
-                           ('TEXTCOLOR', (0, 1), (0, -1), colors.white),  # Вертикальная линия
-                           ('BACKGROUND', (0, 1), (0, -1), '#41436a'),
-                           ('FONTNAME', (0, 1), (0, -1), 'NotoSansRegular'),
-                           ('FONTSIZE', (0, 1), (0, -1), 13),
+                                    ('TEXTCOLOR', (0, 1), (0, -1), colors.white),  # Вертикальная линия
+                                    ('BACKGROUND', (0, 1), (0, -1), '#41436a'),
+                                    ('FONTNAME', (0, 1), (0, -1), 'NotoSansRegular'),
+                                    ('FONTSIZE', (0, 1), (0, -1), 13),
 
-                           ('TEXTCOLOR', (1, 1), (-1, -1), colors.black),  # Основной текст
-                           ('BACKGROUND', (1, 1), (-1, -1), colors.white),
-                           ('FONTNAME', (1, 1), (-1, -1), 'NotoSansRegular'),
-                           ('FONTSIZE', (1, 1), (-1, -1), 12)
-                           ]))
-    text_in_doc.append(t)
+                                    ('TEXTCOLOR', (1, 1), (-1, -1), colors.black),  # Основной текст
+                                    ('BACKGROUND', (1, 1), (-1, -1), colors.white),
+                                    ('FONTNAME', (1, 1), (-1, -1), 'NotoSansRegular'),
+                                    ('FONTSIZE', (1, 1), (-1, -1), 12)
+                                    ]))
+    elements_on_pdf_page.append(main_table)
 
     # тех условия
-    text_in_doc.append(Paragraph('Тех. условия', styles['FontBoldSimple']))
+    elements_on_pdf_page.append(Paragraph('Тех. условия', paragraph_styles['FontBoldSimple']))
     if modified_tech_usl:
-        t_u = Table(tech_usloviya, colWidths=col_size, rowHeights=36)
+        technical_specific_in_pdf = Table(technical_specific, colWidths=page_width, rowHeights=36)
     else:
-        tech_usloviya = update_tech_usl(tech_usloviya)
-        t_u = Table(tech_usloviya, colWidths=col_size / 2, rowHeights=26)
-    t_u.setStyle(TableStyle([('FONTNAME', (0, 0), (-1, -1), 'NotoSansRegular'),
-                             ('FONTSIZE', (0, 0), (-1, -1), 12)]))
-    text_in_doc.append(t_u)
-    text_in_doc.append(Paragraph('_', styles['FontBoldSimple']))
+        technical_specific = update_technical_specific(technical_specific)
+        technical_specific_in_pdf = Table(technical_specific, colWidths=page_width / 2, rowHeights=26)
+    technical_specific_in_pdf.setStyle(TableStyle([('FONTNAME', (0, 0), (-1, -1), 'NotoSansRegular'),
+                                                   ('FONTSIZE', (0, 0), (-1, -1), 12)]))
+    elements_on_pdf_page.append(technical_specific_in_pdf)
+    elements_on_pdf_page.append(Paragraph('_', paragraph_styles['FontBoldSimple']))
 
     # картинка
     for file in os.scandir(directory):
         if file.name.endswith(".png"):
-            img = Image(directory + file.name, width=col_size, height=row_size)
-            text_in_doc.append(img)
+            graphic = Image(directory + file.name, width=page_width, height=page_height)
+            elements_on_pdf_page.append(graphic)
 
     # ссылка на бота
-    address = '<link href="' + bot_url + '">' + f'Создано в телеграм боте @{bot_name}' + '</link>'
-    text_in_doc.append(Paragraph(address, styles['FontRegularRIGHTsimple']))
+    link_to_this_bot = '<link href="' + bot_url + '">' + f'Создано в телеграм боте @{bot_name}' + '</link>'
+    elements_on_pdf_page.append(Paragraph(link_to_this_bot, paragraph_styles['FontRegularRIGHTsimple']))
 
-    doc.build(text_in_doc)
+    doc.build(elements_on_pdf_page)
 
     return file_name
 
@@ -641,14 +616,14 @@ def zernovoi_testing_go(title: str,
     return text, list_names, list_ves, list_cho, list_po, list_pp, dno_state
 
 
-def list_formatting(raw_list):
-    finally_list = []
+def float_to_int_formatting(raw_list):
+    formatted_list = []
     for _ in raw_list:
         if int(_) == float(_):
-            finally_list.append(str(int(_)))
+            formatted_list.append(str(int(_)))
         else:
-            finally_list.append("{0:.2f}".format(_))
-    return finally_list
+            formatted_list.append("{0:.2f}".format(_))
+    return formatted_list
 
 
 # формируем таблицу в строковой форме
@@ -658,10 +633,10 @@ def zernovoi_table_str(list_names: list,
                        list_po: list,
                        list_pp: list,
                        ves_all: float):
-    list_ves = list_formatting(list_ves)
-    list_cho = list_formatting(list_cho)
-    list_po = list_formatting(list_po)
-    list_pp = list_formatting(list_pp)
+    list_ves = float_to_int_formatting(list_ves)
+    list_cho = float_to_int_formatting(list_cho)
+    list_po = float_to_int_formatting(list_po)
+    list_pp = float_to_int_formatting(list_pp)
 
     list_names.insert(0, "Вес")
     list_ves.insert(0, str(ves_all))

@@ -1,25 +1,21 @@
-from functions.beton import beton_change_size, beton_change_metric, beton_change_type, beton_change_w, \
-    beton_parameters_check
+from functions.beton import *
 from functions.grunt import grunt_check_parameters, grunt_change_plotnost, grunt_change_v_ring
 from functions.settings import main_settings_check_parameters, settings_change_dno_true
 from functions.sheben import sheben_check_all_parameters, sheben_settings_reset_all
 from keyboards.inline_keyboards.asfalt import asfalt_buttons, asfalt_zernovoi_buttons
-from keyboards.inline_keyboards.beton import beton_buttons, beton_settings_buttons, beton_sbros_choise, \
-    beton_size_switch, beton_metrics_switch, beton_types_buttons, beton_yacheistii_change_w_keyboards
+from keyboards.inline_keyboards.beton import *
 from keyboards.inline_keyboards.grunt import grunt_buttons, grunt_settings_buttons, grunt_sbros_choise
 from keyboards.inline_keyboards.min_por import min_por_buttons
 from keyboards.inline_keyboards.otsev import otsev_buttons
 from keyboards.inline_keyboards.pgs import pgs_buttons
 from keyboards.inline_keyboards.settings import settings_main_buttons, dno_switch_button, time_zone_buttons
-from keyboards.inline_keyboards.sheben import sheben_buttons, sheben_zernovoi_buttons, sheben_settings_buttons, \
-    sheben_all_change, sheben_settings_reset_switch_buttons
+from keyboards.inline_keyboards.sheben import *
 from keyboards.standart_keyboards import grunt_random_button
 from main import dp
 from aiogram.types import CallbackQuery
-from config import standart_max_pl, standart_v_ring, standart_beton_size, standart_beton_metric, standart_beton_type, \
-    standart_beton_w
+from config import *
 from keyboards.inline_keyboards.inline_keyboards import menu_callback
-from loader import change_state, change_time_zone, check_time_zone
+from loader import *
 from keyboards.inline_keyboards.inline_keyboards import entry_buttons
 
 

@@ -8,6 +8,6 @@ from keyboards.inline_keyboards.grunt import grunt_settings_buttons
 from keyboards.inline_keyboards.inline_keyboards import menu_callback
 from keyboards.inline_keyboards.sheben import sheben_settings_buttons
 from loader import AllStates, check_state, change_state, is_float_simple, zernovoi_testing_go, check_ves_all, \
-    create_grafic, tech_usl, zernovoi_table_str, dict_sheben, is_integer_simple, check_dno_state, \
+    create_grafic, standart_technical_specific, zernovoi_table_str, dict_sheben, is_integer_simple, check_dno_state, \
     frakc_names, files_delete, base_commands
 from main import dp

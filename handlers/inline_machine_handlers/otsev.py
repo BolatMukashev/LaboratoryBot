@@ -47,8 +47,8 @@ async def answer_min_por(message: types.Message, state: FSMContext):
             file_name = create_pdf(user_id=user_id,
                                    title=user_state,
                                    table=zernovoi_table,
-                                   tech_usloviya=tech_usloviya,
-                                   orientation='portrait',
+                                   technical_specific=tech_usloviya,
+                                   page_orientation='portrait',
                                    modified_tech_usl=True)
             try:
                 with open(r'./users_files/' + f'{user_id}/' + file_name, 'rb') as document:
