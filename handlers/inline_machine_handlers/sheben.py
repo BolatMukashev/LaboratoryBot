@@ -4,9 +4,7 @@ from aiogram.types import CallbackQuery
 from functions.sheben import sheben_change_all
 from keyboards.inline_keyboards.inline_keyboards import menu_callback
 from keyboards.inline_keyboards.sheben import sheben_settings_buttons
-from loader import AllStates, check_state, change_state, dict_sheben, is_integer_simple, check_dno_state, frakc_names, \
-    base_commands, check_ves_all, zernovoi_testing_go, zernovoi_table_str, tech_usl, create_grafic, create_pdf, \
-    files_delete
+from loader import *
 from main import dp
 
 

@@ -3,8 +3,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
 from functions.otsev import tech_usl_otsev
 from keyboards.inline_keyboards.inline_keyboards import menu_callback
-from loader import AllStates, check_state, change_state, zernovoi_testing_go, check_ves_all, \
-    zernovoi_table_str, check_dno_state, frakc_names, files_delete, base_commands, create_pdf, tech_usl
+from loader import *
 from main import dp
 
 
