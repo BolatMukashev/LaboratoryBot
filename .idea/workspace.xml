@@ -13,17 +13,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c8855ed-a8f3-4cca-8de3-4ab1b4fd5ecb" name="Default Changelist" comment="убрал длинные импорты, заменил на *">
-      <change afterPath="$PROJECT_DIR$/styles_in_pdf.py" afterDir="false" />
+    <list default="true" id="6c8855ed-a8f3-4cca-8de3-4ab1b4fd5ecb" name="Default Changelist" comment="name refactoring + pdf style file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/inline_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/inline_handler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/inline_machine_handlers/asfalt.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/inline_machine_handlers/asfalt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/inline_machine_handlers/beton.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/inline_machine_handlers/beton.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/inline_machine_handlers/miner_poroshok.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/inline_machine_handlers/miner_poroshok.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/inline_machine_handlers/otsev.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/inline_machine_handlers/otsev.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/inline_machine_handlers/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/inline_machine_handlers/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/inline_machine_handlers/sheben.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/inline_machine_handlers/sheben.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles_in_pdf.py" beforeDir="false" afterPath="$PROJECT_DIR$/styles_in_pdf.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,7 +167,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604668902505</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="name refactoring + pdf style file">
+      <created>1604683516049</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1604683516049</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -195,7 +195,8 @@
     <MESSAGE value="test" />
     <MESSAGE value="Исправил работу зерновой отсев" />
     <MESSAGE value="убрал длинные импорты, заменил на *" />
-    <option name="LAST_COMMIT_MESSAGE" value="убрал длинные импорты, заменил на *" />
+    <MESSAGE value="name refactoring + pdf style file" />
+    <option name="LAST_COMMIT_MESSAGE" value="name refactoring + pdf style file" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="17" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604251072557">
@@ -222,22 +223,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="507" y="281" key="Github.CreateGistDialog/0.0.1366.728@0.0.1366.728" timestamp="1604252072739" />
-    <state width="1344" height="105" key="GridCell.Tab.0.bottom" timestamp="1604334454536">
+    <state width="1344" height="105" key="GridCell.Tab.0.bottom" timestamp="1604684147010">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="105" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1604334454536" />
-    <state width="1344" height="105" key="GridCell.Tab.0.center" timestamp="1604334454536">
+    <state width="1344" height="105" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1604684147010" />
+    <state width="1344" height="105" key="GridCell.Tab.0.center" timestamp="1604684147010">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="105" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1604334454536" />
-    <state width="1344" height="105" key="GridCell.Tab.0.left" timestamp="1604334454536">
+    <state width="1344" height="105" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1604684147010" />
+    <state width="1344" height="105" key="GridCell.Tab.0.left" timestamp="1604684147010">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="105" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1604334454536" />
-    <state width="1344" height="105" key="GridCell.Tab.0.right" timestamp="1604334454536">
+    <state width="1344" height="105" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1604684147010" />
+    <state width="1344" height="105" key="GridCell.Tab.0.right" timestamp="1604684147010">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="105" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1604334454536" />
+    <state width="1344" height="105" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1604684147010" />
     <state width="1344" height="217" key="GridCell.Tab.1.bottom" timestamp="1600167808079">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

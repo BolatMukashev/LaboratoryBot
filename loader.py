@@ -6,11 +6,10 @@ from config import MongoDB_key, server_time_zone, bot_name, bot_url
 from prettytable import PrettyTable
 from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
-from reportlab.platypus import Paragraph, SimpleDocTemplate, Table, TableStyle, Image
-from reportlab.lib import colors
+from reportlab.platypus import Paragraph, SimpleDocTemplate, Table, Image
 from reportlab.lib.pagesizes import A4, landscape
 from math import ceil
-from styles_in_pdf import paragraph_styles
+from styles_in_pdf import paragraph_styles, main_table_style, technical_specific_style
 
 pt = PrettyTable()
 
@@ -511,42 +510,19 @@ def create_pdf(user_id: int,
     # таблица
     kol_vo_elements = len(table[0])
     column_width = page_width / kol_vo_elements
-    main_table = Table(table, colWidths=column_width, rowHeights=36)
-    main_table.setStyle(TableStyle([('ALIGN', (0, 0), (-1, -1), 'CENTER'),  # Общие настройки
-                                    ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-                                    ('GRID', (0, 0), (-1, -1), 1, colors.black),
-
-                                    ('TEXTCOLOR', (0, 0), (0, 0), '#f54768'),  # Вес
-                                    ('BACKGROUND', (0, 0), (0, 0), '#41436a'),
-                                    ('FONTNAME', (0, 0), (0, 0), 'NotoSansBold'),
-                                    ('FONTSIZE', (0, 0), (0, 0), 16),
-
-                                    ('TEXTCOLOR', (1, 0), (-1, 0), colors.white),  # Горизонтальная линия
-                                    ('BACKGROUND', (1, 0), (-1, 0), '#41436a'),
-                                    ('FONTNAME', (1, 0), (-1, 0), 'NotoSansRegular'),
-                                    ('FONTSIZE', (1, 0), (-1, 0), 12),
-
-                                    ('TEXTCOLOR', (0, 1), (0, -1), colors.white),  # Вертикальная линия
-                                    ('BACKGROUND', (0, 1), (0, -1), '#41436a'),
-                                    ('FONTNAME', (0, 1), (0, -1), 'NotoSansRegular'),
-                                    ('FONTSIZE', (0, 1), (0, -1), 13),
-
-                                    ('TEXTCOLOR', (1, 1), (-1, -1), colors.black),  # Основной текст
-                                    ('BACKGROUND', (1, 1), (-1, -1), colors.white),
-                                    ('FONTNAME', (1, 1), (-1, -1), 'NotoSansRegular'),
-                                    ('FONTSIZE', (1, 1), (-1, -1), 12)
-                                    ]))
+    main_table = Table(table, colWidths=column_width, rowHeights=36, style=main_table_style)
     elements_on_pdf_page.append(main_table)
 
     # тех условия
     elements_on_pdf_page.append(Paragraph('Тех. условия', paragraph_styles['FontBoldSimple']))
     if modified_tech_usl:
-        technical_specific_in_pdf = Table(technical_specific, colWidths=page_width, rowHeights=36)
+        technical_specific_in_pdf = Table(technical_specific, colWidths=page_width, rowHeights=36,
+                                          style=technical_specific_style)
     else:
         technical_specific = update_technical_specific(technical_specific)
-        technical_specific_in_pdf = Table(technical_specific, colWidths=page_width / 2, rowHeights=26)
-    technical_specific_in_pdf.setStyle(TableStyle([('FONTNAME', (0, 0), (-1, -1), 'NotoSansRegular'),
-                                                   ('FONTSIZE', (0, 0), (-1, -1), 12)]))
+        technical_specific_in_pdf = Table(technical_specific, colWidths=page_width / 2, rowHeights=26,
+                                          style=technical_specific_style)
+
     elements_on_pdf_page.append(technical_specific_in_pdf)
     elements_on_pdf_page.append(Paragraph('_', paragraph_styles['FontBoldSimple']))
 
