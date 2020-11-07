@@ -49,7 +49,7 @@ async def answer_min_por(message: types.Message, state: FSMContext):
                                    table=zernovoi_table,
                                    technical_specific=tech_usloviya,
                                    page_orientation='portrait',
-                                   modified_tech_usl=True)
+                                   technical_specific_is_standard=False)
             try:
                 with open(r'./users_files/' + f'{user_id}/' + file_name, 'rb') as document:
                     await message.answer(text)

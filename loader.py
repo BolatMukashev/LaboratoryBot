@@ -10,6 +10,7 @@ from reportlab.platypus import Paragraph, SimpleDocTemplate, Table, Image
 from reportlab.lib.pagesizes import A4, landscape
 from math import ceil
 from styles_in_pdf import paragraph_styles, main_table_style, technical_specific_style
+from styles_in_graph import *
 
 pt = PrettyTable()
 
@@ -304,8 +305,20 @@ def text_in_list(user_text):
     return text
 
 
-# orientation = 'landscape' or 'portrait'
-def create_grafic(user_id: int, list_pp: list, title: str, orientation: str = 'landscape'):
+def get_picture_sizes(orientation):
+    if orientation == 'landscape':
+        picture_width = 8.2
+        picture_height = 3.8
+    else:
+        picture_width = 8
+        picture_height = 4
+    return picture_width, picture_height
+
+
+def create_grafic(user_id: int,
+                  list_pp: list,
+                  title: str,
+                  orientation: str = 'landscape'):
     proverka = title.split(':')
     maximums = []
     minimums = []
@@ -338,16 +351,15 @@ def create_grafic(user_id: int, list_pp: list, title: str, orientation: str = 'l
 
     list_names = list(map(lambda name: name.replace('фр.', ''), list_names))
 
-    if orientation == 'landscape':
-        col_size = 8.2
-        row_size = 3.8
-    else:
-        col_size = 8
-        row_size = 4
+    picture_width, picture_height = get_picture_sizes(orientation)
 
-    fig, ax = plt.subplots(figsize=(col_size, row_size), dpi=300)
+    fig, ax = plt.subplots(figsize=(picture_width, picture_height), dpi=300)
 
-    ax.set(xlabel='Фракции', ylabel='Значения')
+    # ax.set_title('This is a special font: {}'.format(font_regular), fontproperties=regular_font_property)
+    # заглавие для графика, нужно?
+
+    ax.set_xlabel('Фракции'.format(font_bold), fontproperties=bold_font_property, fontsize=10)
+    ax.set_ylabel('Значения'.format(font_bold), fontproperties=bold_font_property, fontsize=10)
 
     ax.plot(list_names, maximums, color='#f54768', label='max', linestyle='--')
     ax.plot(list_names, minimums, color="#f54768", label='min', linestyle='--')
@@ -360,31 +372,26 @@ def create_grafic(user_id: int, list_pp: list, title: str, orientation: str = 'l
     #  Добавляем линии основной сетки:
     ax.grid(which='major', color='k')
 
-    #  Включаем видимость вспомогательных делений:
+    #  Добавляем линии вспомогательной сетки
     ax.minorticks_on()
 
     #  Теперь можем отдельно задавать внешний вид вспомогательной сетки:
     ax.grid(which='minor',
             color='gray',
-            linestyle=':')
+            linestyle=':',
+            alpha=0.5)
 
-    # подпись для линий
+    # подпись для основных линий (min, max, полный проход)
     ax.legend()
-
-    # plt.show()
-
-    # размер шрифта для боковых title в графике
-    for item in ([ax.title, ax.xaxis.label, ax.yaxis.label]):
-        item.set_fontsize(10)
 
     # размер шрифта для фракций и процентов в графике
     for item in (ax.get_xticklabels() + ax.get_yticklabels()):
         item.set_fontsize(9)
 
-    # ax.set_facecolor('#2a3950') - цвет фона
+    # ax.set_facecolor('#2a3950') - цвет фона, нужен?
 
     # сохраняем график
-    fig.savefig(f'./users_files/{user_id}/grafic.png', bbox_inches='tight')
+    fig.savefig(f'./users_files/{user_id}/graph.png', bbox_inches='tight')
     plt.close(fig)
 
 
@@ -476,7 +483,7 @@ def create_pdf(user_id: int,
                table: list,
                technical_specific: list,
                page_orientation: str = 'portrait',
-               modified_tech_usl: bool = False):
+               technical_specific_is_standard: bool = True):
     directory = (os.getcwd()).replace('\\', '/') + '/users_files/' + f'{user_id}/'
 
     page_orientation, page_width, page_height = get_page_sizes(page_orientation)
@@ -515,12 +522,12 @@ def create_pdf(user_id: int,
 
     # тех условия
     elements_on_pdf_page.append(Paragraph('Тех. условия', paragraph_styles['FontBoldSimple']))
-    if modified_tech_usl:
-        technical_specific_in_pdf = Table(technical_specific, colWidths=page_width, rowHeights=36,
-                                          style=technical_specific_style)
-    else:
+    if technical_specific_is_standard:
         technical_specific = update_technical_specific(technical_specific)
         technical_specific_in_pdf = Table(technical_specific, colWidths=page_width / 2, rowHeights=26,
+                                          style=technical_specific_style)
+    else:
+        technical_specific_in_pdf = Table(technical_specific, colWidths=page_width, rowHeights=36,
                                           style=technical_specific_style)
 
     elements_on_pdf_page.append(technical_specific_in_pdf)

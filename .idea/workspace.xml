@@ -13,10 +13,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c8855ed-a8f3-4cca-8de3-4ab1b4fd5ecb" name="Default Changelist" comment="name refactoring + pdf style file">
+    <list default="true" id="6c8855ed-a8f3-4cca-8de3-4ab1b4fd5ecb" name="Default Changelist" comment="отделил стили таблиц в отдельный файл">
+      <change afterPath="$PROJECT_DIR$/styles_in_graph.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/inline_machine_handlers/miner_poroshok.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/inline_machine_handlers/miner_poroshok.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/inline_machine_handlers/otsev.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/inline_machine_handlers/otsev.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/inline_machine_handlers/sheben.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/inline_machine_handlers/sheben.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/loader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles_in_pdf.py" beforeDir="false" afterPath="$PROJECT_DIR$/styles_in_pdf.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,16 +54,16 @@
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.CommitDialog" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\bolat\progi\aiogram_test\fonts" />
-      <recent name="F:\bolat\progi\aiogram_test" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\bolat\progi\aiogram_test\fonts" />
       <recent name="F:\bolat\progi\aiogram_test" />
       <recent name="F:\bolat\progi\aiogram_test\keyboards\inline_keyboards" />
       <recent name="F:\bolat\progi\aiogram_test\keyboards" />
       <recent name="F:\bolat\progi\aiogram_test\handlers" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\bolat\progi\aiogram_test\fonts" />
+      <recent name="F:\bolat\progi\aiogram_test" />
     </key>
   </component>
   <component name="RunManager" selected="Python.main">
@@ -174,7 +177,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604683516049</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="отделил стили таблиц в отдельный файл">
+      <created>1604684238493</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1604684238493</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -196,7 +206,8 @@
     <MESSAGE value="Исправил работу зерновой отсев" />
     <MESSAGE value="убрал длинные импорты, заменил на *" />
     <MESSAGE value="name refactoring + pdf style file" />
-    <option name="LAST_COMMIT_MESSAGE" value="name refactoring + pdf style file" />
+    <MESSAGE value="отделил стили таблиц в отдельный файл" />
+    <option name="LAST_COMMIT_MESSAGE" value="отделил стили таблиц в отдельный файл" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="17" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604251072557">
@@ -223,22 +234,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="507" y="281" key="Github.CreateGistDialog/0.0.1366.728@0.0.1366.728" timestamp="1604252072739" />
-    <state width="1344" height="105" key="GridCell.Tab.0.bottom" timestamp="1604684147010">
+    <state width="1344" height="105" key="GridCell.Tab.0.bottom" timestamp="1604740093041">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="105" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1604684147010" />
-    <state width="1344" height="105" key="GridCell.Tab.0.center" timestamp="1604684147010">
+    <state width="1344" height="105" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1604740093041" />
+    <state width="1344" height="105" key="GridCell.Tab.0.center" timestamp="1604740093041">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="105" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1604684147010" />
-    <state width="1344" height="105" key="GridCell.Tab.0.left" timestamp="1604684147010">
+    <state width="1344" height="105" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1604740093041" />
+    <state width="1344" height="105" key="GridCell.Tab.0.left" timestamp="1604740093041">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="105" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1604684147010" />
-    <state width="1344" height="105" key="GridCell.Tab.0.right" timestamp="1604684147010">
+    <state width="1344" height="105" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1604740093041" />
+    <state width="1344" height="105" key="GridCell.Tab.0.right" timestamp="1604740093041">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="105" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1604684147010" />
+    <state width="1344" height="105" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1604740093041" />
     <state width="1344" height="217" key="GridCell.Tab.1.bottom" timestamp="1600167808079">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -263,10 +274,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="513" y="232" key="VCS.EditChangelistDialog/0.0.1366.728@0.0.1366.728" timestamp="1604250931589" />
-    <state x="299" y="94" key="Vcs.Push.Dialog.v2" timestamp="1604668913884">
+    <state x="299" y="94" key="Vcs.Push.Dialog.v2" timestamp="1604684247563">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="299" y="94" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1604668913884" />
+    <state x="299" y="94" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1604684247563" />
     <state x="500" y="276" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604252367968">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
