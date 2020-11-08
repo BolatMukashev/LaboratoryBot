@@ -1,4 +1,3 @@
-import os
 import pymongo as pymongo
 from aiogram.dispatcher.filters.state import StatesGroup, State
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
@@ -11,6 +10,7 @@ from reportlab.lib.pagesizes import A4, landscape
 from math import ceil
 from styles_in_pdf import paragraph_styles, main_table_style, technical_specific_style
 from styles_in_graph import *
+from colors import StandardColors
 
 pt = PrettyTable()
 
@@ -361,12 +361,12 @@ def create_grafic(user_id: int,
     ax.set_xlabel('Фракции'.format(font_bold), fontproperties=bold_font_property, fontsize=10)
     ax.set_ylabel('Значения'.format(font_bold), fontproperties=bold_font_property, fontsize=10)
 
-    ax.plot(list_names, maximums, color='#f54768', label='max', linestyle='--')
-    ax.plot(list_names, minimums, color="#f54768", label='min', linestyle='--')
+    ax.plot(list_names, maximums, color=StandardColors.red, label='max', linestyle='--')
+    ax.plot(list_names, minimums, color=StandardColors.red, label='min', linestyle='--')
     ax.plot(list_names, list_pp, 'o-b', alpha=1, label="полный проход",
-            color='#41436a', linewidth=2,  # цвет и размер линии
-            markerfacecolor='#ffffff', markersize=7,  # цвет и размер кружка
-            markeredgecolor='#41436a', markeredgewidth=1.5  # цвет и размер обводки кружка
+            color=StandardColors.blue, linewidth=2,  # цвет и размер линии
+            markerfacecolor=StandardColors.white, markersize=7,  # цвет и размер кружка
+            markeredgecolor=StandardColors.blue, markeredgewidth=1.5  # цвет и размер обводки кружка
             )
 
     #  Добавляем линии основной сетки:
@@ -384,7 +384,7 @@ def create_grafic(user_id: int,
     # подпись для основных линий (min, max, полный проход)
     ax.legend()
 
-    # размер шрифта для фракций и процентов в графике
+    # размер шрифта для процентов и фракций в графике
     for item in (ax.get_xticklabels() + ax.get_yticklabels()):
         item.set_fontsize(9)
 
@@ -599,7 +599,7 @@ def zernovoi_testing_go(title: str,
     return text, list_names, list_ves, list_cho, list_po, list_pp, dno_state
 
 
-def float_to_int_formatting(raw_list):
+def formatting_float_to_int_or_str(raw_list):
     formatted_list = []
     for _ in raw_list:
         if int(_) == float(_):
@@ -616,10 +616,10 @@ def zernovoi_table_str(list_names: list,
                        list_po: list,
                        list_pp: list,
                        ves_all: float):
-    list_ves = float_to_int_formatting(list_ves)
-    list_cho = float_to_int_formatting(list_cho)
-    list_po = float_to_int_formatting(list_po)
-    list_pp = float_to_int_formatting(list_pp)
+    list_ves = formatting_float_to_int_or_str(list_ves)
+    list_cho = formatting_float_to_int_or_str(list_cho)
+    list_po = formatting_float_to_int_or_str(list_po)
+    list_pp = formatting_float_to_int_or_str(list_pp)
 
     list_names.insert(0, "Вес")
     list_ves.insert(0, str(ves_all))

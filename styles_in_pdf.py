@@ -4,8 +4,8 @@ from reportlab.lib.enums import TA_CENTER, TA_RIGHT
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab import rl_config
-from reportlab.lib import colors
 from reportlab.platypus import TableStyle
+from colors import StandardColors
 
 # пути к шрифтам и регистрация шрифтов
 fonts_directory = (os.getcwd()).replace('\\', '/') + '/fonts/'
@@ -44,25 +44,25 @@ paragraph_styles.add(ParagraphStyle(fontName='NotoSansRegular',
 
 main_table_style = TableStyle([('ALIGN', (0, 0), (-1, -1), 'CENTER'),  # Общие настройки
                                ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-                               ('GRID', (0, 0), (-1, -1), 1, colors.black),
+                               ('GRID', (0, 0), (-1, -1), 1, StandardColors.black),
 
-                               ('TEXTCOLOR', (0, 0), (0, 0), '#f54768'),  # Вес
-                               ('BACKGROUND', (0, 0), (0, 0), '#41436a'),
+                               ('TEXTCOLOR', (0, 0), (0, 0), StandardColors.red),  # Вес
+                               ('BACKGROUND', (0, 0), (0, 0), StandardColors.blue),
                                ('FONTNAME', (0, 0), (0, 0), 'NotoSansBold'),
                                ('FONTSIZE', (0, 0), (0, 0), 16),
 
-                               ('TEXTCOLOR', (1, 0), (-1, 0), colors.white),  # Горизонтальная линия
-                               ('BACKGROUND', (1, 0), (-1, 0), '#41436a'),
+                               ('TEXTCOLOR', (1, 0), (-1, 0), StandardColors.white),  # Горизонтальная линия
+                               ('BACKGROUND', (1, 0), (-1, 0), StandardColors.blue),
                                ('FONTNAME', (1, 0), (-1, 0), 'NotoSansRegular'),
                                ('FONTSIZE', (1, 0), (-1, 0), 12),
 
-                               ('TEXTCOLOR', (0, 1), (0, -1), colors.white),  # Вертикальная линия
-                               ('BACKGROUND', (0, 1), (0, -1), '#41436a'),
+                               ('TEXTCOLOR', (0, 1), (0, -1), StandardColors.white),  # Вертикальная линия
+                               ('BACKGROUND', (0, 1), (0, -1), StandardColors.blue),
                                ('FONTNAME', (0, 1), (0, -1), 'NotoSansRegular'),
                                ('FONTSIZE', (0, 1), (0, -1), 13),
 
-                               ('TEXTCOLOR', (1, 1), (-1, -1), colors.black),  # Основной текст
-                               ('BACKGROUND', (1, 1), (-1, -1), colors.white),
+                               ('TEXTCOLOR', (1, 1), (-1, -1), StandardColors.black),  # Основной текст
+                               ('BACKGROUND', (1, 1), (-1, -1), StandardColors.white),
                                ('FONTNAME', (1, 1), (-1, -1), 'NotoSansRegular'),
                                ('FONTSIZE', (1, 1), (-1, -1), 12)
                                ])
