@@ -8,9 +8,9 @@ import matplotlib.pyplot as plt
 from reportlab.platypus import Paragraph, SimpleDocTemplate, Table, Image
 from reportlab.lib.pagesizes import A4, landscape
 from math import ceil
-from styles_in_pdf import paragraph_styles, main_table_style, technical_specific_style
-from styles_in_graph import *
-from colors import StandardColors
+from styles.styles_in_pdf import paragraph_styles, main_table_style, technical_specific_style
+from styles.styles_in_graph import *
+from styles.colors import StandardColors
 
 pt = PrettyTable()
 
@@ -33,7 +33,7 @@ client = pymongo.MongoClient(MongoDB_key)
 db = client.test
 users_data_base = db.laboratory_bot
 
-base_commands = ['/menu', '/instructions', '/settings', '/help', '/statistics']
+base_commands = ['/menu', '/instructions', '/settings', '/help', '/statistics', '/promotion']
 
 
 def id_seach(simple_user_id):
@@ -370,7 +370,7 @@ def create_grafic(user_id: int,
             )
 
     #  Добавляем линии основной сетки:
-    ax.grid(which='major', color='k')
+    ax.grid(which='major', color='k', alpha=0.4)
 
     #  Добавляем линии вспомогательной сетки
     ax.minorticks_on()

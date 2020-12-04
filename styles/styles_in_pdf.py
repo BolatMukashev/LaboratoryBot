@@ -5,13 +5,15 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab import rl_config
 from reportlab.platypus import TableStyle
-from colors import StandardColors
+from styles.colors import StandardColors
+
 
 # пути к шрифтам и регистрация шрифтов
 fonts_directory = (os.getcwd()).replace('\\', '/') + '/fonts/'
 rl_config.TTFSearchPath = fonts_directory
 pdfmetrics.registerFont(TTFont('NotoSansRegular', fonts_directory + 'NotoSans-Regular.ttf'))
 pdfmetrics.registerFont(TTFont('NotoSansBold', fonts_directory + 'NotoSans-Bold.ttf'))
+
 
 # применяем стили
 paragraph_styles = getSampleStyleSheet()  # дефолтовые стили
@@ -42,6 +44,7 @@ paragraph_styles.add(ParagraphStyle(fontName='NotoSansRegular',
                                     alignment=TA_RIGHT,
                                     spaceBefore=15))
 
+
 main_table_style = TableStyle([('ALIGN', (0, 0), (-1, -1), 'CENTER'),  # Общие настройки
                                ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
                                ('GRID', (0, 0), (-1, -1), 1, StandardColors.black),
@@ -66,6 +69,7 @@ main_table_style = TableStyle([('ALIGN', (0, 0), (-1, -1), 'CENTER'),  # Общ�
                                ('FONTNAME', (1, 1), (-1, -1), 'NotoSansRegular'),
                                ('FONTSIZE', (1, 1), (-1, -1), 12)
                                ])
+
 
 technical_specific_style = TableStyle([('FONTNAME', (0, 0), (-1, -1), 'NotoSansRegular'),
                                        ('FONTSIZE', (0, 0), (-1, -1), 12)])

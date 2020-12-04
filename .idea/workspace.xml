@@ -13,11 +13,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c8855ed-a8f3-4cca-8de3-4ab1b4fd5ecb" name="Default Changelist" comment="отделил стили шрифтов в графике в отдельный файл">
-      <change afterPath="$PROJECT_DIR$/colors.py" afterDir="false" />
+    <list default="true" id="6c8855ed-a8f3-4cca-8de3-4ab1b4fd5ecb" name="Default Changelist" comment="отдельный файл для стандартных цветов">
+      <change afterPath="$PROJECT_DIR$/classes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/colors.py" beforeDir="false" afterPath="$PROJECT_DIR$/styles/colors.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/loader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles_in_pdf.py" beforeDir="false" afterPath="$PROJECT_DIR$/styles_in_pdf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles_in_graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/styles/styles_in_graph.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles_in_pdf.py" beforeDir="false" afterPath="$PROJECT_DIR$/styles/styles_in_pdf.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,16 +55,16 @@
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.CommitDialog" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\bolat\progi\aiogram_test\fonts" />
+      <recent name="F:\bolat\progi\aiogram_test" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\bolat\progi\LaboratoryBot\styles" />
       <recent name="F:\bolat\progi\aiogram_test\fonts" />
       <recent name="F:\bolat\progi\aiogram_test" />
       <recent name="F:\bolat\progi\aiogram_test\keyboards\inline_keyboards" />
       <recent name="F:\bolat\progi\aiogram_test\keyboards" />
-      <recent name="F:\bolat\progi\aiogram_test\handlers" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\bolat\progi\aiogram_test\fonts" />
-      <recent name="F:\bolat\progi\aiogram_test" />
     </key>
   </component>
   <component name="RunManager" selected="Python.main">
@@ -189,7 +192,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604740226793</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="отдельный файл для стандартных цветов">
+      <created>1604832807231</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1604832807231</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -213,7 +223,8 @@
     <MESSAGE value="name refactoring + pdf style file" />
     <MESSAGE value="отделил стили таблиц в отдельный файл" />
     <MESSAGE value="отделил стили шрифтов в графике в отдельный файл" />
-    <option name="LAST_COMMIT_MESSAGE" value="отделил стили шрифтов в графике в отдельный файл" />
+    <MESSAGE value="отдельный файл для стандартных цветов" />
+    <option name="LAST_COMMIT_MESSAGE" value="отдельный файл для стандартных цветов" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="17" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604251072557">
@@ -240,22 +251,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="507" y="281" key="Github.CreateGistDialog/0.0.1366.728@0.0.1366.728" timestamp="1604252072739" />
-    <state width="1344" height="105" key="GridCell.Tab.0.bottom" timestamp="1604832420094">
+    <state width="1344" height="105" key="GridCell.Tab.0.bottom" timestamp="1604833571990">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="105" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1604832420094" />
-    <state width="1344" height="105" key="GridCell.Tab.0.center" timestamp="1604832420094">
+    <state width="1344" height="105" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1604833571990" />
+    <state width="1344" height="105" key="GridCell.Tab.0.center" timestamp="1604833571990">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="105" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1604832420094" />
-    <state width="1344" height="105" key="GridCell.Tab.0.left" timestamp="1604832420094">
+    <state width="1344" height="105" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1604833571990" />
+    <state width="1344" height="105" key="GridCell.Tab.0.left" timestamp="1604833571990">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="105" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1604832420094" />
-    <state width="1344" height="105" key="GridCell.Tab.0.right" timestamp="1604832420094">
+    <state width="1344" height="105" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1604833571990" />
+    <state width="1344" height="105" key="GridCell.Tab.0.right" timestamp="1604833571990">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="105" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1604832420094" />
+    <state width="1344" height="105" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1604833571990" />
     <state width="1344" height="217" key="GridCell.Tab.1.bottom" timestamp="1600167808079">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
